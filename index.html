@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>medID</title>
+</head>
+<body>
+    <form>
+        <label>NAME</label><br>
+        <input type="text" id="name" placeholder="Enter your name"></input><br>
+        <label>DATE OF BIRTH</label><br>
+        <input type="date" id="date" placeholder="Enter your DOB"></input><br>
+        <label>GENDER</label><br>
+        <select id="gen">
+            <option>MALE</option>
+            <option>FEMALE</option>
+            <option>OTHER</option>
+        </select><br>
+        <label>ALLERGIES</label><br>
+        <input type="text" id="search_box" placeholder="Search here"/><br>
+        <div  class="suggestions">
+          
+        </div>
+        <button type="submit " id="submit" >SUBMIT</button>
+      
+    </form>
+    <!-- <script src="index.js"></script> -->
+    <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-database.js"></script> 
+
+
+<script id="mainscript">
+     // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyAyl3sfyTmUgtxAq4M5055MiV-LU1hJ9Ds",
+    authDomain: "fir-1-36f3e.firebaseapp.com",
+    databaseURL: "https://fir-1-36f3e.firebaseio.com",
+    projectId: "fir-1-36f3e",
+    storageBucket: "fir-1-36f3e.appspot.com",
+    messagingSenderId: "267164310431",
+    appId: "1:267164310431:web:71a6b96bf21c80375c3baa"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  //ready
+  var nameV,dateV,genV,search_boxV;
+  function Ready(){
+      nameV=document.getElementById('name').value;
+      dateV=document.getElementById('date').value;
+      genV=document.getElementById('gen').value;
+      search_boxV=document.getElementById('search_box').value;
+     /// console.log(nameV,dateV,genV,search_boxV);
+  }
+  //insert
+ 
+
+  document.getElementById('submit').onclick= function(){
+      Ready();
+     
+      firebase.database().ref('medid/'+ nameV).set({
+            name_of_patient:nameV,
+            date_of_birth:dateV,
+            gender:genV,
+            allergy:search_boxV
+      });
+    };
+</script>
+</body>
+</html>
